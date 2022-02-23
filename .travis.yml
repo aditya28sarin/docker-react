@@ -1,0 +1,14 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+# before the tests are ran
+before_install:
+  - docker build -t aditya28sarin/docker-react -f Dockerfile.dev . # to build the image
+
+# all commands needed to actually run our test suite
+# each time our test suite runs on travis CI, it will assume that test suite runs
+# and exits automatically
+script:
+  - docker run aditya28sarin/docker-react npm run test -- --coverage
